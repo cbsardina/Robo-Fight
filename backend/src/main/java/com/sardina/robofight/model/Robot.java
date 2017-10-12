@@ -10,8 +10,13 @@ public class Robot {
     private int id;
     private String name;
     private String occupation;
-    private List<String> skills;
+    private String city;
+    private String country;
     private String avatar;
+    private String skill1;
+    private String skill2;
+    private String skill3;
+
 
   // -- POJO --
     public Robot() {}
@@ -46,6 +51,16 @@ public class Robot {
         this.occupation = occupation;
     }
 
+    @Column(name = "city")
+    public String getCity() { return city; }
+
+    public void setCity(String city) { this.city = city; }
+
+    @Column(name = "country")
+    public String getCountry() { return country; }
+
+    public void setCountry(String country) { this.country = country; }
+
     @OneToMany(mappedBy = "robot", fetch = FetchType.LAZY)
     public List<String> getSkills() {
         return skills;
@@ -64,7 +79,22 @@ public class Robot {
         this.avatar = avatar;
     }
 
-  // --------------------
+    @Column(name = "skill1")
+    public String getSkill1() { return skill1; }
+
+    public void setSkill1(String skill1) { this.skill1 = skill1; }
+
+    @Column(name = "skill2")
+    public String getSkill2() { return skill2; }
+
+    public void setSkill2(String skill2) { this.skill2 = skill2; }
+
+    @Column(name = "skill3")
+    public String getSkill3() { return skill3; }
+
+    public void setSkill3(String skill3) { this.skill3 = skill3; }
+
+    // --------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,12 +111,15 @@ public class Robot {
     }
 
   // -- Override toString() --
+
     @Override
     public String toString() {
         return "Robot{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", occupation='" + occupation + '\'' +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
                 ", skills=" + skills +
                 ", avatar='" + avatar + '\'' +
                 '}';

@@ -9,7 +9,7 @@ public class Player {
 
     private int id;
     private String playerName;
-    private String score;
+    private int score;
 
   // -- POJO --
     public Player() {}
@@ -36,15 +36,11 @@ public class Player {
     }
 
     @Column(name = "score")
-    public String getScore() {
-        return score;
-    }
+    public int getScore() { return score; }
 
-    public void setScore(String score) {
-        this.score = score;
-    }
+    public void setScore(int score) { this.score = score; }
 
-  // ----------------------------------
+    // ----------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
