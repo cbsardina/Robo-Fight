@@ -1,7 +1,6 @@
 package com.sardina.robofight.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "robot")
@@ -61,15 +60,6 @@ public class Robot {
 
     public void setCountry(String country) { this.country = country; }
 
-    @OneToMany(mappedBy = "robot", fetch = FetchType.LAZY)
-    public List<String> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(List<String> skills) {
-        this.skills = skills;
-    }
-
     @Column(name = "avatar")
     public String getAvatar() {
         return avatar;
@@ -112,6 +102,7 @@ public class Robot {
 
   // -- Override toString() --
 
+
     @Override
     public String toString() {
         return "Robot{" +
@@ -120,8 +111,10 @@ public class Robot {
                 ", occupation='" + occupation + '\'' +
                 ", city='" + city + '\'' +
                 ", country='" + country + '\'' +
-                ", skills=" + skills +
                 ", avatar='" + avatar + '\'' +
+                ", skill1='" + skill1 + '\'' +
+                ", skill2='" + skill2 + '\'' +
+                ", skill3='" + skill3 + '\'' +
                 '}';
     }
 }

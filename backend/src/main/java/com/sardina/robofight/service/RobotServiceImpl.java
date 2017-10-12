@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Random;
+import java.util.Optional;
 
 @Service
 public class RobotServiceImpl implements RobotService {
@@ -18,16 +18,32 @@ public class RobotServiceImpl implements RobotService {
     @Transactional(readOnly = true)
     @Override
     public Robot getById(int id) {
-        Random random = new Random();
-        int num = random.nextInt(51);
 
-        return robotRepository.getOne(num);
+        return robotRepository.getOne(id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Robot> getAll() {
         return robotRepository.findAll();
+    }
+
+    @Transactional
+    @Override
+    public Optional<Robot> getTen() {
+        List<Robot> allRobots = robotRepository.findAll();
+        Optional<Robot> tenRandom =
+                allRobots.stream()
+                    .limit(10)
+                    .findAny();
+        return tenRandom;
+
+    }
+
+    @Override
+    public void addTen(List<Robot> robots) {
+        robots.stream()
+                .forEach(robot -> robotRepository.save(robot));
     }
 
     @Transactional

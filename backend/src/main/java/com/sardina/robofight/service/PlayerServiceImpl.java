@@ -24,6 +24,9 @@ public class PlayerServiceImpl implements PlayerService {
     @Transactional(readOnly = true)
     @Override
     public List<Player> getAll() {
-        return playerRepository.findAll();
+        List<Player> players = playerRepository.findAll();
+        players.stream()
+                .sorted();
+        return players;
     }
 }

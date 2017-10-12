@@ -1,15 +1,18 @@
 package com.sardina.robofight.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+
+@Entity
+@Table(name = "player")
 public class Player {
 
     private int id;
     private String playerName;
     private int score;
+    private List<RoboQue> roboQue = new ArrayList<>();
 
   // -- POJO --
     public Player() {}
@@ -40,6 +43,11 @@ public class Player {
 
     public void setScore(int score) { this.score = score; }
 
+    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
+    public List<RoboQue> getRoboQue() { return roboQue; }
+
+    public void setRoboQue(List<RoboQue> roboQue) { this.roboQue = roboQue; }
+
     // ----------------------------------
     @Override
     public boolean equals(Object o) {
@@ -57,12 +65,14 @@ public class Player {
     }
 
   // -- Override toString() --
+
     @Override
     public String toString() {
         return "Player{" +
                 "id=" + id +
                 ", playerName='" + playerName + '\'' +
-                ", score='" + score + '\'' +
+                ", score=" + score +
+                ", roboQue=" + roboQue +
                 '}';
     }
 }

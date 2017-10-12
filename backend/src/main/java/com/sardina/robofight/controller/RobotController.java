@@ -3,14 +3,12 @@ package com.sardina.robofight.controller;
 import com.sardina.robofight.model.Robot;
 import com.sardina.robofight.service.RobotService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 10000)
 @RestController
 public class RobotController {
 
@@ -18,16 +16,16 @@ public class RobotController {
     RobotService robotService;
 
     @RequestMapping(value = "/api/index", method = RequestMethod.GET)
-    public List<Robot> initialRoboGroup() {
-        List<Robot> robos = new ArrayList<>();
-            //TODO:
+    public List<Robot> allRobots() {
+        List<Robot> robos = robotService.getAll();
+
         return robos;
     }
 
     @RequestMapping(value = "/api/set_one", method = RequestMethod.GET)
     public Robot getOneRoboToFight(){
         Robot robo = new Robot();
-            //TODO:
+
         return robo;
     }
 
