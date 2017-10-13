@@ -12,7 +12,7 @@ public class Player {
     private int id;
     private String playerName;
     private int score;
-    private List<RobotQue> robotQue = new ArrayList<>();
+    private List<Robot> robotQue = new ArrayList<>();
 //    private List<Robot> robots = new ArrayList<>();
 
   // -- POJO --
@@ -45,9 +45,9 @@ public class Player {
     public void setScore(int score) { this.score = score; }
 
     @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
-    public List<RobotQue> getRobotQue() { return robotQue; }
+    public List<Robot> getRobotQue() { return robotQue; }
 
-    public void setRobotQue(List<RobotQue> robotQue) { this.robotQue = robotQue; }
+    public void setRobotQue(List<Robot> robotQue) { this.robotQue = robotQue; }
 
 //    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
 //    public List<Robot> getRobots() { return robots; }
@@ -71,7 +71,6 @@ public class Player {
     }
 
   // -- Override toString() --
-
 
     @Override
     public String toString() {

@@ -93,7 +93,7 @@ public class PlayerServiceImpl implements PlayerService {
   // ----- getOneDeleteONe -----------------------
     @Transactional(readOnly = true)
     @Override
-    public RobotQue removeOneQue(int id) {
+    public Robot removeOneQue(int id) {
         Player player = playerRepository.findOne(id);
         List<RobotQue> wholeQue = robotQueRepository.findAll();
 

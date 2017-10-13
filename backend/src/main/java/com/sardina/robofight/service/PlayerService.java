@@ -1,6 +1,7 @@
 package com.sardina.robofight.service;
 
 import com.sardina.robofight.model.Player;
+import com.sardina.robofight.model.Robot;
 import com.sardina.robofight.model.RobotQue;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface PlayerService {
 
     void getTenAddTen(int id);
 
-    RobotQue removeOneQue(int id);
+    Robot removeOneQue(int id);
     void deleteQue(int id);
 
 }
