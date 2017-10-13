@@ -1,12 +1,11 @@
 package com.sardina.robofight.service;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sardina.robofight.model.Player;
-import com.sardina.robofight.model.RoboQue;
+import com.sardina.robofight.model.RobotQue;
 import com.sardina.robofight.model.Robot;
 import com.sardina.robofight.repository.PlayerRepository;
-import com.sardina.robofight.repository.RoboQueRepository;
+import com.sardina.robofight.repository.RobotQueRepository;
 import com.sardina.robofight.repository.RobotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,15 +24,20 @@ public class PlayerServiceImpl implements PlayerService {
     RobotRepository robotRepository;
 
     @Autowired
-    RoboQueRepository roboQueRepository;
+    RobotQueRepository robotQueRepository;
 
- // -- Player transactions --
+// ====================================
+// ======= Player transactions ========
+
+  // ----- add --------------------
     @Transactional
     @Override
     public void add(Player player) {
         playerRepository.save(player);
     }
 
+
+  // ----- findAll ---------------------
     @Transactional(readOnly = true)
     @Override
     public List<Player> findAll() {
@@ -43,52 +47,74 @@ public class PlayerServiceImpl implements PlayerService {
         return leaderboard;
     }
 
+  // ----- findPlayerById -------------------
     @Transactional(readOnly = true)
     @Override
-    public Player findPlayer(int id) {
+    public Player findPlayerById(int id) {
         return playerRepository.findOne(id);
     }
 
+  // ----- updatePlayer ----------------------
     @Transactional
     @Override
     public void updatePlayer(Player player) {
         playerRepository.save(player);
     }
 
- // -- Robot transactions --
+
+//===============================
+// ==== Robot transactions =====
+
+  // ----- getTenAddTen -------------------
+    @Transactional(readOnly = true)
     @Override
-    public void getTenAddTen() {
+    public void getTenAddTen(int id) {
         List<Robot> allRobots =robotRepository.findAll();
+        List<RobotQue> tempList = new ArrayList<>();
         int i = 0;
         while(i<10) {
             Random r = new Random();
             int randomNum = r.nextInt(allRobots.size());
-            RoboQue rQue = new RoboQue();
             Robot temp = allRobots.remove(randomNum);
+            RobotQue rQue = new RobotQue();
                 rQue.setName(temp.getName());
                 rQue.setOccupation(temp.getOccupation());
                 rQue.setCity(temp.getCity());
                 rQue.setCountry(temp.getCountry());
                 rQue.setAvatar(temp.getAvatar());
-                    roboQueRepository.save(rQue);
+                    robotQueRepository.save(rQue);
+                Player player = playerRepository.findOne(id);
+                player.getRobotQue().add(rQue);
+                    playerRepository.save(player);
             i++;
         }
     }
 
+  // ----- getOneDeleteONe -----------------------
+    @Transactional(readOnly = true)
     @Override
-    public RoboQue getOneDeleteOne() {
-        List<RoboQue> currentQue = roboQueRepository.findAll();
-        RoboQue nextRobot = currentQue.remove(0);
+    public RobotQue removeOneQue(int id) {
+        Player player = playerRepository.findOne(id);
+        List<RobotQue> wholeQue = robotQueRepository.findAll();
 
-        int nexId = nextRobot.getId();
-        roboQueRepository.delete(nexId);
+        RobotQue nextRobot =
+                wholeQue.stream()
+                    .findFirst()
+                    .filter(robotQue -> robotQue.getPlayer().)
+                //TODO: PICK UP ON THIS!!!
+                player.getRobotQue().remove(i);
 
         return nextRobot;
     }
 
+  // ------ deleteQue --------------------------
+    @Transactional
     @Override
-    public void deleteQue() {
-        roboQueRepository.deleteAll();
+    public void deleteQue(int id) {
+        Player player = playerRepository.findOne(id);
+            player.getRobotQue().clear();
+
+        robotQueRepository.deleteAll();
     }
 }
 

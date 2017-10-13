@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "roboque")
-public class RoboQue {
+@Table(name = "robotque")
+public class RobotQue {
 
     // -- POJO --
 
     private String skill3;
-    public RoboQue() {}
+    public RobotQue() {}
 
     private Player player;
     private int id;
@@ -87,9 +87,9 @@ public class RoboQue {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        RoboQue roboQue = (RoboQue) o;
+        RobotQue robotQue = (RobotQue) o;
 
-        return id == roboQue.id;
+        return id == robotQue.id;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class RoboQue {
 
     @Override
     public String toString() {
-        return "RoboQue{" +
+        return "RobotQue{" +
                 "player=" + player +
                 ", id=" + id +
                 ", name='" + name + '\'' +
