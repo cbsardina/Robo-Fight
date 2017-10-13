@@ -97,12 +97,12 @@ public class PlayerServiceImpl implements PlayerService {
         Player player = playerRepository.findOne(id);
         List<RobotQue> wholeQue = robotQueRepository.findAll();
 
-        RobotQue nextRobot =
-                wholeQue.stream()
-                    .findFirst()
-                    .filter(robotQue -> robotQue.getPlayer().)
-                //TODO: PICK UP ON THIS!!!
-                player.getRobotQue().remove(i);
+//        RobotQue nextRobot =
+//                wholeQue.stream()
+//                    .findFirst()
+//                    .filter(robotQue -> robotQue.getPlayer().getRobotQue())
+//                //TODO: PICK UP ON THIS!!!
+//                player.getRobotQue().remove(i);
 
         return nextRobot;
     }

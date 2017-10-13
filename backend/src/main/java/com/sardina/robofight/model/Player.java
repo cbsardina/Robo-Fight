@@ -13,7 +13,7 @@ public class Player {
     private String playerName;
     private int score;
     private List<RobotQue> robotQue = new ArrayList<>();
-    private List<Robot> robots = new ArrayList<>();
+//    private List<Robot> robots = new ArrayList<>();
 
   // -- POJO --
     public Player() {}
@@ -49,10 +49,10 @@ public class Player {
 
     public void setRobotQue(List<RobotQue> robotQue) { this.robotQue = robotQue; }
 
-    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
-    public List<Robot> getRobots() { return robots; }
-
-    public void setRobots(List<Robot> robots) { this.robots = robots; }
+//    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
+//    public List<Robot> getRobots() { return robots; }
+//
+//    public void setRobots(List<Robot> robots) { this.robots = robots; }
 
     // ----------------------------------
     @Override
@@ -79,8 +79,7 @@ public class Player {
                 "id=" + id +
                 ", playerName='" + playerName + '\'' +
                 ", score=" + score +
-                ", robotQue(Size)=" + robotQue.size() +
-                ", robots(Size)=" + robots.size() +
+                ", robotQue=" + robotQue +
                 '}';
     }
 }
