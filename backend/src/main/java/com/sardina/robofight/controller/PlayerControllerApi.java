@@ -10,7 +10,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 10000)
 @RestController
-public class PlayerController {
+public class PlayerControllerApi {
 
     @Autowired
     PlayerService playerservice;

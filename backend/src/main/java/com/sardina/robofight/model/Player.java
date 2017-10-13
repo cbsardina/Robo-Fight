@@ -13,6 +13,7 @@ public class Player {
     private String playerName;
     private int score;
     private List<RoboQue> roboQue = new ArrayList<>();
+    private List<Robot> robots = new ArrayList<>();
 
   // -- POJO --
     public Player() {}
@@ -48,6 +49,11 @@ public class Player {
 
     public void setRoboQue(List<RoboQue> roboQue) { this.roboQue = roboQue; }
 
+    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
+    public List<Robot> getRobots() { return robots; }
+
+    public void setRobots(List<Robot> robots) { this.robots = robots; }
+
     // ----------------------------------
     @Override
     public boolean equals(Object o) {
@@ -66,13 +72,15 @@ public class Player {
 
   // -- Override toString() --
 
+
     @Override
     public String toString() {
         return "Player{" +
                 "id=" + id +
                 ", playerName='" + playerName + '\'' +
                 ", score=" + score +
-                ", roboQue=" + roboQue +
+                ", roboQue(Size)=" + roboQue.size() +
+                ", robots(Size)=" + robots.size() +
                 '}';
     }
 }

@@ -27,13 +27,9 @@ public class RoboQueServiceImpl implements RoboQueService {
     @Transactional
     @Override
     public RoboQue getOneRandom() {
-        List<RoboQue> currentQue = roboQueRepository.findAll();
-        RoboQue nextRobot = currentQue.remove(0);
 
-        int nexId = nextRobot.getId();
-        roboQueRepository.delete(nexId);
 
-        return nextRobot;
+        return null;
     }
 
   // -- deleteAll() deletes entire que at the end of the game --

@@ -1,11 +1,14 @@
 package com.sardina.robofight.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "robot")
 public class Robot {
 
+    private Player player;
     private int id;
     private String name;
     private String occupation;
@@ -21,6 +24,13 @@ public class Robot {
     public Robot() {}
 
   // -- GETTERs/SETTERs --
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "player_id")
+    public Player getPlayer() { return player; }
+
+    public void setPlayer(Player player) { this.player = player; }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
