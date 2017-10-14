@@ -2,7 +2,6 @@ package com.sardina.robofight.controller;
 
 
 import com.sardina.robofight.model.Player;
-import com.sardina.robofight.model.Robot;
 import com.sardina.robofight.model.RobotQue;
 import com.sardina.robofight.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;

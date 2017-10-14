@@ -9,12 +9,9 @@ import javax.persistence.*;
 @Table(name = "robotque")
 public class RobotQue {
 
-    // -- POJO --
-
-    private String skill3;
+  // -- POJO --
     public RobotQue() {}
 
-    private Player player;
     private int id;
     private String name;
     private String occupation;
@@ -23,23 +20,15 @@ public class RobotQue {
     private String avatar;
     private String skill1;
     private String skill2;
+    private String skill3;
 
-
-    // -- GETTERs/SETTERs --
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "player_id")
-    public Player getPlayer() { return player; }
-
-    public void setPlayer(Player player) { this.player = player; }
+  // -- GETTERs/SETTERs --
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() { return id; }
 
-    public void setId(int id) {
-        this.id = id; }
+    public void setId(int id) { this.id = id; }
 
     @Column(name = "name")
     public String getName() { return name; }
@@ -81,7 +70,7 @@ public class RobotQue {
 
     public void setSkill3(String skill3) { this.skill3 = skill3; }
 
-    // --------------------------------------------
+  // --------------------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,13 +86,11 @@ public class RobotQue {
         return id;
     }
 
-    // -- toString() --
-
+  // -- toString() --
     @Override
     public String toString() {
         return "RobotQue{" +
-                "player=" + player +
-                ", id=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", occupation='" + occupation + '\'' +
                 ", city='" + city + '\'' +
@@ -114,7 +101,4 @@ public class RobotQue {
                 ", skill3='" + skill3 + '\'' +
                 '}';
     }
-
-
-
 }

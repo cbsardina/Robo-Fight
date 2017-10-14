@@ -1,14 +1,11 @@
 package com.sardina.robofight.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "robot")
 public class Robot {
 
-    private Player player;
     private int id;
     private String name;
     private String occupation;
@@ -19,18 +16,10 @@ public class Robot {
     private String skill2;
     private String skill3;
 
-
   // -- POJO --
     public Robot() {}
 
   // -- GETTERs/SETTERs --
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "player_id")
-    public Player getPlayer() { return player; }
-
-    public void setPlayer(Player player) { this.player = player; }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -94,7 +83,7 @@ public class Robot {
 
     public void setSkill3(String skill3) { this.skill3 = skill3; }
 
-    // --------------------
+  // --------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,8 +100,6 @@ public class Robot {
     }
 
   // -- Override toString() --
-
-
     @Override
     public String toString() {
         return "Robot{" +

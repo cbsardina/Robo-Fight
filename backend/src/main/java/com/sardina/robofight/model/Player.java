@@ -10,16 +10,14 @@ public class Player {
     private String playerName;
     private int score;
 
-    // -- POJO --
+  // -- POJO --
     public Player() {}
 
   // -- GETTERs/SETTERs --
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
     public void setId(int id) {
         this.id = id;
@@ -39,7 +37,7 @@ public class Player {
 
     public void setScore(int score) { this.score = score; }
 
-    // ----------------------------------
+  // ----------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
