@@ -13,9 +13,9 @@ public interface PlayerService {
     Player findPlayerById(int id);
     void updatePlayer(Player player);
 
-    void getTenAddTen(int id);
+    void getTenAddTen();
 
-    Robot removeOneQue(int id);
-    void deleteQue(int id);
+    RobotQue removeOneDeleteOne();
+    void deleteQue();
 
 }

@@ -1,9 +1,6 @@
 package com.sardina.robofight.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Entity
 @Table(name = "player")
@@ -12,10 +9,8 @@ public class Player {
     private int id;
     private String playerName;
     private int score;
-    private List<Robot> robotQue = new ArrayList<>();
-//    private List<Robot> robots = new ArrayList<>();
 
-  // -- POJO --
+    // -- POJO --
     public Player() {}
 
   // -- GETTERs/SETTERs --
@@ -44,16 +39,6 @@ public class Player {
 
     public void setScore(int score) { this.score = score; }
 
-    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
-    public List<Robot> getRobotQue() { return robotQue; }
-
-    public void setRobotQue(List<Robot> robotQue) { this.robotQue = robotQue; }
-
-//    @OneToMany(mappedBy = "player", fetch = FetchType.EAGER)
-//    public List<Robot> getRobots() { return robots; }
-//
-//    public void setRobots(List<Robot> robots) { this.robots = robots; }
-
     // ----------------------------------
     @Override
     public boolean equals(Object o) {
@@ -64,21 +49,19 @@ public class Player {
 
         return id == player.id;
     }
-
     @Override
     public int hashCode() {
         return id;
     }
 
-  // -- Override toString() --
 
+  // -- Override toString() --
     @Override
     public String toString() {
         return "Player{" +
                 "id=" + id +
                 ", playerName='" + playerName + '\'' +
                 ", score=" + score +
-                ", robotQue=" + robotQue +
                 '}';
     }
 }

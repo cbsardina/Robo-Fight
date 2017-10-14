@@ -68,9 +68,8 @@ public class PlayerServiceImpl implements PlayerService {
   // ----- getTenAddTen -------------------
     @Transactional(readOnly = true)
     @Override
-    public void getTenAddTen(int id) {
+    public void getTenAddTen() {
         List<Robot> allRobots =robotRepository.findAll();
-        List<RobotQue> tempList = new ArrayList<>();
         int i = 0;
         while(i<10) {
             Random r = new Random();
@@ -83,9 +82,6 @@ public class PlayerServiceImpl implements PlayerService {
                 rQue.setCountry(temp.getCountry());
                 rQue.setAvatar(temp.getAvatar());
                     robotQueRepository.save(rQue);
-                Player player = playerRepository.findOne(id);
-                player.getRobotQue().add(rQue);
-                    playerRepository.save(player);
             i++;
         }
     }
@@ -93,27 +89,19 @@ public class PlayerServiceImpl implements PlayerService {
   // ----- getOneDeleteONe -----------------------
     @Transactional(readOnly = true)
     @Override
-    public Robot removeOneQue(int id) {
-        Player player = playerRepository.findOne(id);
+    public RobotQue removeOneDeleteOne() {
         List<RobotQue> wholeQue = robotQueRepository.findAll();
+        RobotQue nextUp = wholeQue.remove(0);
+            int deleteId = nextUp.getId();
+        robotQueRepository.delete(deleteId);
 
-//        RobotQue nextRobot =
-//                wholeQue.stream()
-//                    .findFirst()
-//                    .filter(robotQue -> robotQue.getPlayer().getRobotQue())
-//                //TODO: PICK UP ON THIS!!!
-//                player.getRobotQue().remove(i);
-
-        return nextRobot;
+        return nextUp;
     }
 
   // ------ deleteQue --------------------------
     @Transactional
     @Override
-    public void deleteQue(int id) {
-        Player player = playerRepository.findOne(id);
-            player.getRobotQue().clear();
-
+    public void deleteQue() {
         robotQueRepository.deleteAll();
     }
 }

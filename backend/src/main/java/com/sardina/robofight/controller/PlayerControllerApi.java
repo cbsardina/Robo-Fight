@@ -17,8 +17,10 @@ public class PlayerControllerApi {
     @Autowired
     PlayerService playerservice;
 
-    @PostMapping("/api/new_player")
-    public String  addPlayerSetupGame(@RequestParam String newPlayer) {
+  // - set up new game: add player to db & return id; create new robot Que
+    @PostMapping("/api/new_game")
+    public String addPlayerSetupGame(@RequestParam String newPlayer) {
+
         Player addPlayer = new Player();
         addPlayer.setPlayerName(newPlayer);
             playerservice.add(addPlayer);
@@ -31,33 +33,28 @@ public class PlayerControllerApi {
                         .getAsInt();
         Player currentPlayer = playerservice.findPlayerById(lastPlayerId);
             Integer playerId = currentPlayer.getId();
+      // - set up que --
+        playerservice.getTenAddTen();
 
         return playerId.toString();
     }
 
-    @GetMapping("/api/start_game")
-    public String setQueAndGetOne() {
-
-        playerservice.getTenAddTen();
-        RobotQue firstRobot = playerservice.getOneDeleteOne();
-
+  // - get a robot from que -
+    @GetMapping("/api/get_robot")
+    public RobotQue getOne() {
+        return playerservice.removeOneDeleteOne();
     }
 
-
-
-    @RequestMapping(value = "/api/add_score", method = RequestMethod.POST)
-    public void addScore(@RequestParam String name, @RequestParam int score) {
-        Player newScore = new Player();
-            newScore.setPlayerName(name);
-            newScore.setScore(score);
-
-            playerservice.add(newScore);
-    }
-
-    @RequestMapping(value = "/api/leaderboard", method = RequestMethod.GET)
-    public List<Player> getLeaderBoard() {
-        List<Player> leaderBoard = playerservice.getAll();
-
-        return leaderBoard;
+  // -
+    @PostMapping("/api/end_game")
+    public List<Player> endGameClearQueGetLeaderboard(@RequestParam int id, @RequestParam int score) {
+      // - get player from db, update score, save to db
+        Player player = playerservice.findPlayerById(id);
+            player.setScore(score);
+        playerservice.updatePlayer(player);
+      // - delete que to end game and for next game
+        playerservice.deleteQue();
+      // - get all players for leaderboard
+        return playerservice.findAll();
     }
 }
