@@ -8,14 +8,16 @@ import java.util.List;
 
 public interface PlayerService {
 
-    void add(Player player);
-    List<Player> findAll();
+    void addPlayer(Player player);
+    List<Player> findAllPlayers();
     Player findPlayerById(int id);
     void updatePlayer(Player player);
+    List<Robot> getAllRobots();
 
     void getTenAddTen();
 
     RobotQue removeOneDeleteOne();
     void deleteQue();
+    void deletePlayers();
 
 }

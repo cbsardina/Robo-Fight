@@ -38,6 +38,8 @@ public class Player {
     public void setScore(int score) { this.score = score; }
 
   // ----------------------------------
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -47,13 +49,12 @@ public class Player {
 
         return id == player.id;
     }
+
     @Override
     public int hashCode() {
         return id;
     }
 
-
-  // -- Override toString() --
     @Override
     public String toString() {
         return "Player{" +

@@ -32,16 +32,33 @@ public class PlayerServiceImpl implements PlayerService {
   // ----- add --------------------
     @Transactional
     @Override
-    public void add(Player player) {
+    public void addPlayer(Player player) {
+//        List<Player> allPlayers = playerRepository.findAll();
+//        if(allPlayers.size() == 0) {
+//            Player newPlayer = new Player();
+//            newPlayer.setId(1);
+//            newPlayer.setPlayerName(playerName);
+//            playerRepository.save(newPlayer);
+//        } else {
+//            int newId = allPlayers.stream()
+//                    .mapToInt(player -> player.getId())
+//                    .max()
+//                    .getAsInt();
+//
+//            Player player = new Player();
+//                player.setId(newId + 1);
+//                player.setPlayerName(playerName);
+//            playerRepository.save(player);
+//        }
         playerRepository.save(player);
     }
-
 
   // ----- findAll ---------------------
     @Transactional(readOnly = true)
     @Override
-    public List<Player> findAll() {
+    public List<Player> findAllPlayers() {
         List<Player> allPlayers = playerRepository.findAll();
+
         List<Player> leaderboard = allPlayers.stream().sorted().collect(Collectors.toList());
 
         return leaderboard;
@@ -66,7 +83,7 @@ public class PlayerServiceImpl implements PlayerService {
 // ==== Robot transactions =====
 
   // ----- getTenAddTen -------------------
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void getTenAddTen() {
         List<Robot> allRobots =robotRepository.findAll();
@@ -87,7 +104,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
   // ----- getOneDeleteONe -----------------------
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public RobotQue removeOneDeleteOne() {
         List<RobotQue> wholeQue = robotQueRepository.findAll();
@@ -103,6 +120,19 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     public void deleteQue() {
         robotQueRepository.deleteAll();
+    }
+
+
+// -- FOR DEVELOPMENT -----
+  // ++++ GET ALL ROBOTS +++++
+    @Override
+    public List<Robot> getAllRobots() {
+        return robotRepository.findAll();
+    }
+
+    @Override
+    public void deletePlayers() {
+        playerRepository.deleteAll();
     }
 }
 
